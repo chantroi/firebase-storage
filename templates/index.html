@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <style>
+        body {
+            background-color: white;
+        }
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    {% for i, item in enumerate(items) %}
+        {{ i+1 }}. <a href='{{ app_url }}/{{ item }}'>{{ item }}</a> 
+        {% if item.endswith('.pdf') %}
+            <span>[PDF]</span>
+        {% elif item.endswith('.docx') %}
+            <span>[DOCX]</span>
+        {% elif item.endswith('.xlsx') %}
+            <span>[XLSX]</span>
+        {% elif item.endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
+            <span>[IMAGE]</span>
+        {% elif item.endswith(('.mp3', '.wav', '.ogg')) %}
+            <span>[AUDIO]</span>
+        {% elif item.endswith(('.mp4', '.avi', '.mov')) %}
+            <span>[VIDEO]</span>
+        {% endif %}
+        <br><br>
+    {% endfor %}
+</body>
+</html>
