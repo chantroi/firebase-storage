@@ -2,3 +2,4 @@ requests
 deta 
 jinja2
 flask
+uwsgi
