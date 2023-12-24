@@ -42,8 +42,9 @@ async def files_handler():
 
 
 @app.get("/json")
-async def files_handler_api():
-  items = [{item['name']: quote(item['name'])} for item in base.fetch().items]
+async def files_handler_api(request: Request):
+  url = str(request.url).replace('json', '')
+  items = [f"{url}{quote(item['name'])}" for item in base.fetch().items]
   return items
 
 
