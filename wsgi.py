@@ -47,7 +47,8 @@ def files_handler():
 
 @app.route("/json", methods=["GET"])
 def files_handler_api():
-    items = [{item['name']: quote(item['name'])} for item in base.fetch().items]
+    url = str(request.url).replace('json', '')
+    items = [f"{url}{quote(item['name'])}" for item in base.fetch().items]
     return {"items": items}
 
 @app.route("/<path:filename>", methods=["GET"])
