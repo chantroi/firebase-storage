@@ -1,7 +1,5 @@
 FROM python:latest
 
-RUN pip install uwsgi
-
 COPY . .
 RUN pip install -r requirements.txt
 
