@@ -8,8 +8,8 @@ app = Flask(__name__, static_folder='static')
 @app.route("/")
 def home():
     if request.referrer:
-    if 'iframe' in request.referrer:
-        return "Collection"
+        if 'iframe' in request.referrer:
+            return "Collection"
     return redirect("/album"), 301
 
 @app.route("/favicon.ico")
