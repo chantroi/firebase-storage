@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file, redirect
+from flask import Flask, request, render_template, send_file, redirect, abort
 from urllib.parse import quote, unquote
 from storage import list_files, upload_name, get_file, delete_file
 from pathlib import Path
@@ -38,8 +38,11 @@ def files_handler_api():
 @app.route("/<path:filename>", methods=["GET"])
 def file_handler(filename):
     filename = unquote(filename)
-    file = get_file(filename)
-    return render_template("video_player.html", video_link=file)
+    try:
+        file = get_file(filename)
+        return render_template("video_player.html", video_link=file)
+    except:
+        abort(404)
     
 @app.route("/<filename>", methods=["POST"])
 def files_handler_put(filename):
