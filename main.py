@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, send_file
+from flask import Flask, request, render_template, send_file, redirect
 from urllib.parse import quote, unquote
 from storage import list_files, upload_name, get_file, delete_file
 from pathlib import Path
@@ -7,7 +7,10 @@ app = Flask(__name__, static_folder='static')
 
 @app.route("/")
 def home():
-  return "Collection"
+    if request.referrer:
+    if 'iframe' in request.referrer:
+        return "Collection"
+    return redirect("/album"), 301
 
 @app.route("/favicon.ico")
 def favicon():
