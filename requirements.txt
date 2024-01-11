@@ -3,3 +3,4 @@ deta
 jinja2
 flask
 uwsgi
+firebase-admin
