@@ -2,34 +2,35 @@
 <html>
 <head>
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <style>
-        body {
-            background-color: white;
-        }
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: black;
-            }
-        }
-    </style>
+	<link rel="stylesheet" href="/static/list.css">
 </head>
 <body>
-    {% for i, item in enumerate(items) %}
-        {{ i+1 }}. <a href='{{ app_url }}/{{ item }}'>{{ item }}</a> 
-        {% if item.endswith('.pdf') %}
-            <span>[PDF]</span>
-        {% elif item.endswith('.docx') %}
-            <span>[DOCX]</span>
-        {% elif item.endswith('.xlsx') %}
-            <span>[XLSX]</span>
-        {% elif item.endswith(('.png', '.jpg', '.jpeg', '.gif')) %}
-            <span>[IMAGE]</span>
-        {% elif item.endswith(('.mp3', '.wav', '.ogg')) %}
-            <span>[AUDIO]</span>
-        {% elif item.endswith(('.mp4', '.avi', '.mov')) %}
-            <span>[VIDEO]</span>
-        {% endif %}
-        <br><br>
-    {% endfor %}
+<h1>Dreams Collection</h1>
+{% for i in range(0, len(items), 17) %}
+<div class="paper">
+<div class="lines">
+	<strong>Page {{ i // 17 + 1 }}</strong>
+	<ul>
+		{% for name, link in items[i:i+17] %}
+		<li><a href="{{ link }}">{{ name }}</a></li>
+		{% endfor %}
+	</ul>
+	</div>
+	<div class="holes">
+		<div class="hole"></div>
+		<div class="hole"></div>
+		<div class="hole"></div>
+	</div>
+</div>
+{% endfor %}
+	<script>
+    function toggleDarkMode() {
+      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.body.classList.toggle('dark-mode', isDarkMode);
+    }
+    window.addEventListener('load', toggleDarkMode);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', toggleDarkMode);   
+	</script>
+	
 </body>
 </html>

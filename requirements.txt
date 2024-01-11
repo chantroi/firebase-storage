@@ -3,5 +3,3 @@ deta
 jinja2
 flask
 uwsgi
-fastapi
-uvicorn

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
+  <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+    }
+    a {
+      color: blue;
+    }
+    body.dark-mode {
+      background-color: black;
+      color: white;
+    }
+    body.dark-mode a {
+      color: orange;
+    }
+    #link {
+      color: green;
+    }
+    body.dark-mode #link {
+      color: orange;
+    }
+    .video-container {
+       width: 100%;
+       poistion: relative;
+     }
+  </style>
+  
+</head>
+<body>
+  <div class="video-container">
+    <video id="player" playsinline controls>
+      <source src="{{ video_link }}" type="video/mp4" />
+    </video>
+  </div>
+  <script>
+    const player = new Plyr('#player');
+    function toggleDarkMode() {
+      const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.body.classList.toggle('dark-mode', isDarkMode);
+    }
+    window.addEventListener('load', toggleDarkMode);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', toggleDarkMode);
+  </script>
+</body>
+</html>
